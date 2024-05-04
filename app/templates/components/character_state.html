@@ -1,0 +1,34 @@
+<h2 style="margin: 0px">Characters:</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Character</th>
+            <th>Wounds/Limit</th>
+            <th>Strain/Limit</th>
+            <th>Defense Melee/Ranged</th>
+            <th>Soak</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="character-table-body">
+        {% for character in character_states %}
+        <tr id="character-row-{{character.char_name}}">
+            <td>{{ character.char_name }}</td>
+            <td>{{ character.wound_current }}/{{ character.wound_limit }}</td>
+            <td>{{ character.strain_current }}/{{ character.strain_limit }}</td>
+            <td>{{ character.defense_melee }}/{{ character.defense_ranged }}</td>
+            <td>{{ character.soak }}</td>
+            <td>{{ character.status }}</td>
+            <td>
+                <button class="bg-red-700 hover:bg-red-300 size-8 hexagon" id="action-{{character.char_name}}-increase-wound">+ HP</button>
+                <button class="bg-red-700 hover:bg-red-300 size-8 hexagon" id="action-{{character.char_name}}-increase-strain">+ S</button>
+                <button class="bg-sky-800 hover:bg-sky-300 size-8 hexagon" id="action-{{character.char_name}}-decrease-wound">- HP</button>
+                <button class="bg-sky-800 hover:bg-sky-300 size-8 hexagon" id="action-{{character.char_name}}-decrease-strain">- S</button>
+                <button class="bg-yellow-700 hover:bg-yellow-300 size-8 hexagon" id="action-{{character.char_name}}-edit"> Edit </button>
+                <button class="bg-red-700 hover:bg-red-300 size-8 hexagon" id="action-{{character.char_name}}-delete"> delete </button>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<button id="add-character-button" class="bg-sky-700 hover:bg-sky-300 size-8 hexagon">NEW</button>

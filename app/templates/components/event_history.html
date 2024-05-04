@@ -1,0 +1,6 @@
+<h2 class="m-0">Event History:</h2>
+<ul id="messages" class="flex flex-col-reverse">
+    {% for message in messages %}
+    <li>{{ message.display_event }}</li>
+    {% endfor %}
+</ul>

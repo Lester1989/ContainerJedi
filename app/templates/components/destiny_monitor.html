@@ -1,0 +1,12 @@
+<h2 style="margin: 0px">Destiny Monitor:</h2>
+<ul id="destiny-monitor">
+    {% for destiny_state in destiny_states %}
+    <li
+    id="destiny-{{destiny_state.id}}"
+    class="size-16 rounded-full inline-block m-1 cursor-pointer"
+    style="background-color: {% if destiny_state.is_light %} yellow {% else %} black {% endif %};" >
+    </li>
+    {% endfor %}
+</ul>
+<button id="add-destiny-button" class="bg-sky-700 hover:bg-sky-300 size-8 hexagon">+</button>
+<button id="remove-destiny-button" class="bg-red-700 hover:bg-red-300 size-8 hexagon">-</button>

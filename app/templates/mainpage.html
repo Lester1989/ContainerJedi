@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html style="background-color: darkslategrey; color: whitesmoke">
+  <head>
+    <title>ContainerJedi</title>
+    <link
+      rel="stylesheet"
+      href="https://pyscript.net/releases/2024.4.2/core.css"
+    />
+    <script
+      type="module"
+      src="https://pyscript.net/releases/2024.4.2/core.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="/static/output.css"/>
+  </head>
+  <body>
+    <div id="loading-blocker" class="block fixed top-0 right-0 w-full h-full bg-slate-500/70 backdrop-blur-md z-10" >
+      <h1 class="text-white drop-shadow-md text-center text-4xl top-1/2 right-1/2 fixed">
+        Loading...
+      </h1>
+    </div>
+    <div
+      id="socket-status-indicator"
+      class="size-6 rounded-full fixed top-4 right-4 m-4 bg-red-500/70 drop-shadow-md"></div>
+    <h1>{{ group_name }}</h1>
+    <h2>Your ID: <span id="ws-id"></span></h2>
+    <div class="bg-slate-300 p-0.5 m-4  octagon">
+      <div class="bg-slate-700 p-6  octagon">
+          {% include 'components/destiny_monitor.html' %}
+      </div>
+    </div>
+
+    <div class="bg-slate-300 p-0.5 m-4  octagon">
+      <div class="bg-slate-700 p-6  octagon">
+          {% include 'components/event_history.html' %}
+    </div>
+    </div>
+    <div class="bg-slate-300 p-0.5 m-4  octagon">
+      <div class="bg-slate-700 p-6  octagon">
+        <h2 style="margin: 0px">Dice:</h2>
+        coming soon...
+    </div>
+  </div>
+  <div class="bg-slate-300 p-0.5 m-4  octagon">
+    <div class="bg-slate-700 p-6  octagon">
+        {% include 'components/character_state.html' %}
+    </div>
+  </div>
+  <div class="bg-slate-300 p-0.5 m-4  octagon">
+    <div class="bg-slate-700 p-6  octagon">
+        <h2 style="margin: 0px">Drawing:</h2>
+        coming soon...
+    </div>
+    </div>
+
+    <div id="blab" style="background-color: rgb(164, 70, 70)"></div>
+    <py-config>
+      [[fetch]]
+      from="../../static/scripts/"
+      files = ["message_types.py","destiny_message_handler.py","message_handler_base.py","character_state_message_handler.py"]
+    </py-config>
+    <py-script
+      type="py"
+      src="/static/scripts/pywebsocket.py"
+      target="blab"
+    ></py-script>
+  </body>
+</html>
