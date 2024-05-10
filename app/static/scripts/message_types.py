@@ -215,3 +215,61 @@ class CharacterDeleteMessage(JediMessage):
     @property
     def display_event(self):
         return f"{self.created_at}: {self.author} - Deleted Character({self.char_name})"
+
+
+class RollReqestMessage(JediMessage):
+    """A message that represents a request to roll dice"""
+
+    dice_pool: str
+    comment: str
+
+    def __init__(
+        self,
+        group_name: str,
+        char_name: str,
+        author: str,
+        dice_pool: str,
+        comment: str,
+        created_at: str = None,
+        **_,
+    ):
+        """Creates a new RollReqestMessage object and fills base fields"""
+        self.message_type = "RollReqestMessage"
+        self.dice_pool = dice_pool
+        self.comment = comment
+        self.group_name = group_name
+        self.char_name = char_name
+        self.author = author
+        self.created_at = created_at or datetime.now().strftime("%H:%M:%S")
+
+class RollResultMessage(JediMessage):
+    """A message that represents the result of a dice roll"""
+
+    dice_pool: str
+    result: str
+    comment: str
+
+    def __init__(
+        self,
+        group_name: str,
+        char_name: str,
+        author: str,
+        dice_pool: str,
+        result: str,
+        comment: str,
+        created_at: str = None,
+        **_,
+    ):
+        """Creates a new RollResultMessage object and fills base fields"""
+        self.message_type = "RollResultMessage"
+        self.dice_pool = dice_pool
+        self.result = result
+        self.comment = comment
+        self.group_name = group_name
+        self.char_name = char_name
+        self.author = author
+        self.created_at = created_at or datetime.now().strftime("%H:%M:%S")
+
+    @property
+    def display_event(self):
+        return f"{self.created_at}: {self.author} - Rolled {self.dice_pool}: {self.result}\n{self.comment}"

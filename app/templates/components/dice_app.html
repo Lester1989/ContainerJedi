@@ -1,0 +1,82 @@
+<h2 style="margin: 0px">Characters:</h2>
+<div class="flex flex-row flex-wrap gap-4">
+    <div class="flex flex-row border-white shadow-sm p-2 border-1 shadow-white items-center">
+    <div class="flex flex-col">
+      <button id="dice-proficiency-up" class="bg-sky-500 hover:bg-sky-200 border-black size-12 text-white text-4xl" > ↑ </button>
+      <button id="dice-proficiency-down" class="bg-sky-500 hover:bg-sky-200 border-black size-12 text-white text-4xl" > ↓ </button>
+    </div>
+    <label class="font-extrabold text-8xl text-white" id="dice-proficiency-count">
+        0
+    </label>
+    <div class="size-24 pentagon bg-yellow-500"> </div>
+    </div>
+    <div class="flex flex-row border-white shadow-sm p-2 border-1 shadow-white items-center">
+    <div class="flex flex-col">
+      <button id="dice-ability-up" class="bg-sky-500 hover:bg-sky-200 border-black size-12 text-white text-4xl" > ↑ </button>
+      <button id="dice-ability-down" class="bg-sky-500 hover:bg-sky-200 border-black size-12 text-white text-4xl" > ↓ </button>
+    </div>
+    <label class="font-extrabold text-8xl text-white" id="dice-ability-count">
+        0
+    </label>
+    <div class="size-24 rombus bg-green-500"> </div>
+    </div>
+    <div class="flex flex-row border-white shadow-sm p-2 border-1 shadow-white items-center">
+        <div class="flex flex-col">
+        <button id="dice-boost-up" class="bg-sky-500 hover:bg-sky-200 border-black size-12 text-white text-4xl" > ↑ </button>
+        <button id="dice-boost-down" class="bg-sky-500 hover:bg-sky-200 border-black size-12 text-white text-4xl" > ↓ </button>
+        </div>
+        <label class="font-extrabold text-8xl text-white" id="dice-boost-count">
+            0
+        </label>
+        <div class="size-24 bg-sky-500"> </div>
+    </div>
+    <div class="flex flex-row border-white shadow-sm p-2 border-1 shadow-white items-center">
+        <div class="flex flex-col">
+        <button id="dice-challenge-up" class="bg-sky-500 hover:bg-sky-200 border-black size-12 text-white text-4xl" > ↑ </button>
+        <button id="dice-challenge-down" class="bg-sky-500 hover:bg-sky-200 border-black size-12 text-white text-4xl" > ↓ </button>
+        </div>
+        <label class="font-extrabold text-8xl text-white" id="dice-challenge-count">
+            0
+        </label>
+        <div class="size-24 pentagon bg-red-500"> </div>
+    </div>
+    <div class="flex flex-row border-white shadow-sm p-2 border-1 shadow-white items-center">
+      <div class="flex flex-col">
+          <button id="dice-difficulty-up" class="bg-sky-500 hover:bg-sky-200 border-black size-12 text-white text-4xl" > ↑ </button>
+          <button id="dice-difficulty-down" class="bg-sky-500 hover:bg-sky-200 border-black size-12 text-white text-4xl" > ↓ </button>
+        </div>
+        <label class="font-extrabold text-8xl text-white" id="dice-difficulty-count">
+            0
+        </label>
+        <div class="size-24 rombus bg-purple-600"> </div>
+    </div>
+    <div class="flex flex-row border-white shadow-sm p-2 border-1 shadow-white items-center">
+        <div class="flex flex-col">
+        <button id="dice-setback-up" class="bg-sky-500 hover:bg-sky-200 border-black size-12 text-white text-4xl" > ↑ </button>
+        <button id="dice-setback-down" class="bg-sky-500 hover:bg-sky-200 border-black size-12 text-white text-4xl" > ↓ </button>
+        </div>
+        <label class="font-extrabold text-8xl text-white" id="dice-setback-count">
+            0
+        </label>
+        <div class="size-24 bg-black"> </div>
+    </div>
+    <div class="flex flex-row border-white shadow-sm p-2 border-1 shadow-white items-center">
+        <div class="flex flex-col">
+            <button id="dice-force-up" class="bg-sky-500 hover:bg-sky-200 border-black size-12 text-white text-4xl" > ↑ </button>
+            <button id="dice-force-down" class="bg-sky-500 hover:bg-sky-200 border-black size-12 text-white text-4xl" > ↓ </button>
+        </div>
+        <label class="font-extrabold text-8xl text-white" id="dice-force-count">
+            0
+        </label>
+        <div class="size-24 pentagon bg-white"> </div>
+    </div>
+    <div>
+        <input type="checkbox" id="dice-keep-numbers" name="dice-keep-numbers">
+        <label for="dice-keep-numbers">Keep Dice</label>
+    </div>
+    <div>
+        <label for="dice-comment">Comment for Roll</label>
+        <input type="text" id="dice-comment" name="dice-comment" class="text-black" value="">
+    </div>
+    <button id="roll-dice-button" class="bg-sky-500 hover:bg-sky-200 border-black size-12 text-white text-4xl" >Roll</button>
+</div>

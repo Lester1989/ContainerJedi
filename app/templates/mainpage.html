@@ -22,7 +22,7 @@
     </div>
     <div
       id="socket-status-indicator"
-      class="size-6 rounded-full fixed top-4 right-4 m-4 bg-red-500/70 drop-shadow-md"></div>
+      class="size-6 rounded-full fixed top-4 right-4 m-4 bg-red-500/70 drop-shadow-md z-10"></div>
     <h1>{{ group_name }}</h1>
     <h2>Your ID: <span id="ws-id"></span></h2>
     <div class="bg-slate-300 p-0.5 m-4  octagon">
@@ -38,8 +38,7 @@
     </div>
     <div class="bg-slate-300 p-0.5 m-4  octagon">
       <div class="bg-slate-700 p-6  octagon">
-        <h2 style="margin: 0px">Dice:</h2>
-        coming soon...
+        {% include 'components/dice_app.html' %}
     </div>
   </div>
   <div class="bg-slate-300 p-0.5 m-4  octagon">
@@ -58,7 +57,7 @@
     <py-config>
       [[fetch]]
       from="../../static/scripts/"
-      files = ["message_types.py","destiny_message_handler.py","message_handler_base.py","character_state_message_handler.py"]
+      files = ["message_types.py","destiny_message_handler.py","message_handler_base.py","character_state_message_handler.py","roll_message_handler.py"]
     </py-config>
     <py-script
       type="py"

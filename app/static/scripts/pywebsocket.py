@@ -1,10 +1,9 @@
 import json
 
 from js import WebSocket, document
-from message_types import DestinyAddMessage, DestinySwitchMessage
 from destiny_message_handler import DestinyMessageHandler
 from character_state_message_handler import CharacterStateMessageHandler
-from pyodide.ffi.wrappers import add_event_listener
+from roll_message_handler import RollMessageHandler
 from pyscript import window
 from pyweb import pydom
 
@@ -20,6 +19,7 @@ ws = WebSocket.new(f"ws://{window.location.host}/ws/{group_name}/{client_name}")
 message_handlers = [
     DestinyMessageHandler(group_name, client_name, ws),
     CharacterStateMessageHandler(group_name, client_name, ws),
+    RollMessageHandler(group_name, client_name, ws),
 ]
 
 def my_on_error(event):
@@ -50,7 +50,7 @@ def my_on_message(event):
 def my_on_close(event):
     print(event)
     window.console.log("Closed")
-    pydom["#socket-status-indicator"][0].style["background-color"] = "red"
+    pydom["#socket-status-indicator"][0].style["background-color"] = "rgb(239 68 68 / 0.7)"
 
 
 ws.onclose = my_on_close
