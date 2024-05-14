@@ -2,6 +2,7 @@
 
 from datetime import datetime
 import json
+import html
 
 
 class JediMessage:
@@ -242,6 +243,43 @@ class RollReqestMessage(JediMessage):
         self.author = author
         self.created_at = created_at or datetime.now().strftime("%H:%M:%S")
 
+symbol_lookup = {
+    "empty": "",
+    "despair": "y",
+    "triumph": "x",
+    "dark": "z",
+    "light": "Z"
+}
+
+dice_class_lookup = {
+    "proficiency": "pentagon bg-yellow-500 text-black",
+    "ability": "rombus bg-green-500 text-black",
+    "boost": "bg-sky-500 text-black",
+    "setback": "bg-black text-white",
+    "difficulty": "rombus bg-purple-600 text-black",
+    "challenge": "pentagon bg-red-500 text-black",
+    "force": "pentagon bg-white text-black"
+}
+
+dice_display_lookup = {
+    "proficiency": "<div class='size-20 pentagon bg-yellow-500 text-black'></div>",
+    "ability": "<div class='size-20 rombus bg-green-500 text-black'></div>",
+    "boost": "<div class='size-20 bg-sky-500 text-black'></div>",
+    "setback": "<div class='size-20 bg-black text-white'></div>",
+    "difficulty": "<div class='size-20 rombus bg-purple-600 text-black'></div>",
+    "challenge": "<div class='size-20 pentagon bg-red-500 text-black'></div>",
+    "force": "<div class='size-20 pentagon bg-white text-black'></div>",
+    "dark": "<div class='sw-symbol-font text-6xl text-white'>z</div>",
+    "light": "<div class='sw-symbol-font text-6xl text-white'>Z</div>",
+    "triumph": "<div class='sw-symbol-font text-6xl text-white'>x</div>",
+    "success": "<div class='sw-symbol-font text-6xl text-white'>s</div>",
+    "advantage": "<div class='sw-symbol-font text-6xl text-white'>a</div>",
+    "despair": "<div class='sw-symbol-font text-6xl text-white'>y</div>",
+    "failure": "<div class='sw-symbol-font text-6xl text-white'>f</div>",
+    "threat": "<div class='sw-symbol-font text-6xl text-white'>t</div>",
+
+}
+
 class RollResultMessage(JediMessage):
     """A message that represents the result of a dice roll"""
 
@@ -272,4 +310,28 @@ class RollResultMessage(JediMessage):
 
     @property
     def display_event(self):
-        return f"{self.created_at}: {self.author} - Rolled {self.dice_pool}: {self.result}\n{self.comment}"
+        result_dict:dict[str,list[str]] = json.loads(self.result)
+        formatted_result = ""
+        result_sums = {}
+        for dice, results in result_dict.items():
+            dice_classes = dice_class_lookup.get(dice, "font-white")
+            for result in results:
+                content = "".join(symbol_lookup.get(r, r.lower()[0]) for r in result.split("_"))
+                for symbol in content:
+                    result_sums[symbol] = result_sums.get(symbol, 0) + 1
+                formatted_result += f'<span class="m-1 inline-block min-h-16 min-w-16 text-center content-center sw-symbol-font {dice_classes} {"text-lg" if "_" in result else ""}">{content}</span>'
+        calculated_results = {
+            'x': result_sums.get('x', 0),
+            'y': result_sums.get('y', 0),
+            's': result_sums.get('s', 0)-result_sums.get('f', 0),
+            'f': result_sums.get('f', 0)-result_sums.get('s', 0),
+            'a': result_sums.get('a', 0)-result_sums.get('t', 0),
+            't': result_sums.get('t', 0)-result_sums.get('a', 0),
+            'z': result_sums.get('z', 0)-result_sums.get('Z', 0),
+            'Z': result_sums.get('Z', 0)-result_sums.get('z', 0),
+        }
+        if all(value <=0 for value in calculated_results.values()):
+            message = "Alle Dice have cancelled each other out"
+        else:
+            message = 'Symbols Counted: '+ ', '.join(f'<span class=" sw-symbol-font text-white text-lg">{k}<span>: {v}' for k,v in calculated_results.items() if v>0)
+        return f'{self.created_at}: {self.author} - {self.char_name} rolled <div class="flex flex-row flex-wrap">{formatted_result}</div> <br> {message} {"<br>"+html.escape(self.comment) if self.comment else ""}'

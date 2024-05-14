@@ -15,6 +15,8 @@ from app.static.scripts.message_types import (
     CharacterCreateMessage,
     CharacterDeleteMessage,
     CharacterUpdateMessage,
+    RollReqestMessage,
+    RollResultMessage,
 )
 MessageHandlerType = Callable[[Type[JediMessage]], Awaitable[Type[JediMessage]]]
 
@@ -35,6 +37,8 @@ class MessageBus:
             "CharacterCreateMessage": CharacterCreateMessage,
             "CharacterDeleteMessage": CharacterDeleteMessage,
             "CharacterUpdateMessage": CharacterUpdateMessage,
+            "RollReqestMessage": RollReqestMessage,
+            "RollResultMessage": RollResultMessage,
 
         }
         self.message_history_handler = None

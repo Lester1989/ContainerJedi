@@ -2,6 +2,8 @@
 
 from datetime import datetime
 from typing import Type
+import random
+import json
 
 from sqlmodel import Session, select
 
@@ -14,6 +16,8 @@ from app.static.scripts.message_types import (
     CharacterCreateMessage,
     CharacterDeleteMessage,
     CharacterUpdateMessage,
+    RollResultMessage,
+    RollReqestMessage,
 )
 
 #+ DESTINY
@@ -158,3 +162,100 @@ async def delete_character_state(message: CharacterDeleteMessage):
         session.delete(character_state)
         session.commit()
     return message
+#+
+
+#+ ROLL
+async def roll_dice(message: RollReqestMessage):
+    """Rolls dice for a character."""
+    dice_definitions = {
+    'proficiency' : [
+        "success_success",
+        "success_success",
+        "success",
+        "success",
+        "advantage_advantage",
+        "advantage_advantage",
+        "advantage",
+        "success_advantage",
+        "success_advantage",
+        "success_advantage",
+        "triumph",
+        "empty",
+    ],
+    'ability' : [
+        "success",
+        "success",
+        "success_success",
+        "advantage",
+        "advantage",
+        "advantage_advantage",
+        "success_advantage",
+        "empty",
+    ],
+    'boost' : [
+        "success",
+        "advantage",
+        "success_advantage",
+        "advantage_advantage",
+        "empty",
+        "empty",
+    ],
+    'challenge' : [
+        "failure",
+        "failure",
+        "failure_failure",
+        "failure_failure",
+        "threat",
+        "threat",
+        "threat_threat",
+        "threat_threat",
+        "failure_threat",
+        "failure_threat",
+        "despair",
+        "empty",
+    ],
+    'difficulty' : [
+        "failure",
+        "failure_failure",
+        "threat",
+        "threat",
+        "threat",
+        "threat_threat",
+        "failure_threat",
+        "empty",
+    ],
+    'setback' : [
+        "failure",
+        "failure",
+        "threat",
+        "threat",
+        "empty",
+        "empty",
+    ],
+    'force' : [
+        "dark",
+        "dark",
+        "dark",
+        "dark",
+        "dark",
+        "dark",
+        "dark_dark",
+        "light",
+        "light",
+        "light_light",
+        "light_light",
+        "light_light",
+    ]}
+    results:dict[str,list[str]] ={
+        dice: [random.choice(dice_definitions.get(dice,[dice])) for _ in range(count)]
+        for dice, count in json.loads(message.dice_pool).items()
+    }
+    return  RollResultMessage(
+        group_name=message.group_name,
+        char_name=message.char_name,
+        author=message.author,
+        dice_pool=message.dice_pool,
+        result=json.dumps(results),
+        comment=message.comment,
+    )
+

@@ -12,7 +12,9 @@ from app.db_controller import (
     update_character_state,
     delete_character_state,
     create_character_state,
+    roll_dice,
 )
+
 from app.message_bus import MessageBus
 from app.models import engine
 
@@ -36,3 +38,4 @@ message_bus.register_handler("DestinyRemoveMessage", delete_destiny_state)
 message_bus.register_handler("CharacterCreateMessage", create_character_state)
 message_bus.register_handler("CharacterDeleteMessage", delete_character_state)
 message_bus.register_handler("CharacterUpdateMessage", update_character_state)
+message_bus.register_handler("RollReqestMessage", roll_dice)

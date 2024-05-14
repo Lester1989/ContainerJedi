@@ -9,6 +9,7 @@ from fastapi import Depends, FastAPI, Request, WebSocket, WebSocketDisconnect
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from sqlmodel import Session
+from app.static.scripts.message_types import dice_display_lookup
 
 from app.db_controller import (
     get_destiny_state,
@@ -52,6 +53,7 @@ async def get_group_state(
             "char_name": char_name,
             "group_name": group_name,
             "character_states": character_states,
+            "dice_types": dice_display_lookup,
         },
     )
 

@@ -14,6 +14,16 @@
     clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
 }
 
+.sw-symbol-font {
+    font-family: 'EotE Symbol';
+    font-size: 2em;
+}
+
+@font-face {
+    font-family: 'EotE Symbol';
+    src: url('/static/EotE_Symbol-Regular_v1.otf');
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

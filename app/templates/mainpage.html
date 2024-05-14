@@ -18,6 +18,7 @@
     <div id="loading-blocker" class="block fixed top-0 right-0 w-full h-full bg-slate-500/70 backdrop-blur-md z-10" >
       <h1 class="text-white drop-shadow-md text-center text-4xl top-1/2 right-1/2 fixed">
         Loading...
+        <span class="text-black min-h-16 min-w-16 text-lg inline-block text-center content-center"></span>
       </h1>
     </div>
     <div
@@ -26,28 +27,28 @@
     <h1>{{ group_name }}</h1>
     <h2>Your ID: <span id="ws-id"></span></h2>
     <div class="bg-slate-300 p-0.5 m-4  octagon">
-      <div class="bg-slate-700 p-6  octagon">
+      <div class="bg-slate-700 p-16 octagon">
           {% include 'components/destiny_monitor.html' %}
       </div>
     </div>
 
     <div class="bg-slate-300 p-0.5 m-4  octagon">
-      <div class="bg-slate-700 p-6  octagon">
+      <div class="bg-slate-700 p-16 octagon">
           {% include 'components/event_history.html' %}
     </div>
     </div>
-    <div class="bg-slate-300 p-0.5 m-4  octagon">
-      <div class="bg-slate-700 p-6  octagon">
+    <div class="bg-slate-300 p-0.5 m-4 octagon w-[900px]">
+      <div class="bg-slate-700 p-16 octagon">
         {% include 'components/dice_app.html' %}
     </div>
   </div>
   <div class="bg-slate-300 p-0.5 m-4  octagon">
-    <div class="bg-slate-700 p-6  octagon">
+    <div class="bg-slate-700 p-16 octagon">
         {% include 'components/character_state.html' %}
     </div>
   </div>
   <div class="bg-slate-300 p-0.5 m-4  octagon">
-    <div class="bg-slate-700 p-6  octagon">
+    <div class="bg-slate-700 p-16 octagon">
         <h2 style="margin: 0px">Drawing:</h2>
         coming soon...
     </div>

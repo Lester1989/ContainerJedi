@@ -25,9 +25,9 @@ Open Todos:
   * Sortierbar (Ini)
   * NSC Slots
 * Würfel App
-  * Würfel Pool einstellen
+  * [x] Würfel Pool einstellen
     * Würfel vergeben
-  * Würfel Ergebnis
+  * [x] Würfel Ergebnis
     * letztes Würfelergebnis je Charakter
   * Spezialwürfe
   * Ergebnisshop (Vorteile, Nachteile, Triumph, Verzweiflung)
